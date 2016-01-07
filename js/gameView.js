@@ -7,6 +7,9 @@
     this.ctx = ctx;
     this.game = game;
     this.selectedId = 1;
+    this.timeLeft = 30;
+    this.score = 0;
+    this.lives = 5;
   };
 
   GESTURES = {
@@ -31,6 +34,27 @@
         }
       }
     }.bind(this);
+  };
+
+  GameView.prototype.drawScore = function () {
+    this.ctx.clearRect(650, 200, 150, 100);
+    this.ctx.font = "24px Arial";
+    this.ctx.fillStyle = "#0095DD";
+    this.ctx.fillText("Score: " + this.score, 650, 300);
+  };
+
+  GameView.prototype.drawLives = function () {
+    this.ctx.clearRect(450, 200, 150, 100);
+    this.ctx.font = "24px Arial";
+    this.ctx.fillStyle = "#0095DD";
+    this.ctx.fillText("Lives: " + this.lives, 450, 300);
+  };
+
+  GameView.prototype.drawTime = function () {
+    this.ctx.clearRect(250, 200, 150, 100);
+    this.ctx.font = "24px Arial";
+    this.ctx.fillStyle = "#0095DD";
+    this.ctx.fillText("Time: " + this.timeLeft, 250, 300);
   };
 
   GameView.prototype.clearSelectorArea = function () {
@@ -62,9 +86,18 @@
 
   GameView.prototype.start = function () {
     this.bindKeyHandlers();
+    this.startTimer();
 
-    setInterval(function () {
+    this.startIntervalId = setInterval(function () {
       this.displaySelected();
+      this.drawScore();
+      this.drawTime();
+      this.drawLives();
+
+      if (this.timeLeft <= 0 || this.lives <= 0) {
+        window.clearInterval(this.startIntervalId);
+        document.onkeydown = null;
+      }
 
       this.game.weapons.forEach(function (weapon) {
         if (weapon) {
@@ -94,6 +127,12 @@
     }.bind(this), 15);
   };
 
+  GameView.prototype.startTimer = function () {
+    var timerId = setInterval(function () {
+      this.timeLeft--;
+    }.bind(this), 1000);
+  };
+
   GameView.prototype.handleCollision = function (weapon, card) {
     cardVal = GESTURES[card.gesture];
     weaponVal = GESTURES[weapon.gesture];
@@ -104,12 +143,14 @@
       this.isNoCards();
       console.log("tie");
     } else if (((cardVal + 1) % 3) === weaponVal) {
+      this.score++;
       this.game.remove(card);
       this.game.remove(weapon);
       this.clearAreas(weapon, card);
       this.isNoCards();
       console.log("win");
     } else {
+      this.lives--;
       this.game.remove(weapon);
       this.clearAreas(weapon);
       console.log("lose");
@@ -122,6 +163,7 @@
 
   GameView.prototype.isNoCards = function () {
     if (this.game.cards.length === 0) {
+      this.timeLeft += 10;
       this.game.addCards();
     }
   };
