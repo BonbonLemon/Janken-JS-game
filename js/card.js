@@ -3,10 +3,11 @@
     window.Janken = {};
   }
 
-  var Card = Janken.Card = function () {
+  var Card = Janken.Card = function (game) {
     this.pos = [100, 100];
     this.dir = [0, 1];
     this.gesture = this.randomGesture();
+    this.game = game;
   }
 
   Card.prototype.draw = function (ctx) {
@@ -42,8 +43,8 @@
         this.dir = [-1, 0];
         break;
     }
-    this.pos[0] += this.dir[0] * 5;
-    this.pos[1] += this.dir[1] * 5;
+    this.pos[0] += this.dir[0] * 10;
+    this.pos[1] += this.dir[1] * 10;
   };
 
   Card.prototype.randomGesture = function () {
@@ -58,12 +59,12 @@
   };
 
   Card.prototype.isCollideWith = function (weapon) {
-    var cardLeftEdge = [this.pos[0], this.pos[1] + 150];
-    var cardRightEdge = [this.pos[0] + 150, this.pos[1] + 150];
+    var cardLeftEdge = [this.pos[0], this.pos[1] + 100];
+    var cardRightEdge = [this.pos[0] + 100, this.pos[1] + 100];
 
     var weaponLeftEdge = weapon.pos;
-    var weaponRightEdge = [weapon.pos[0] + 150, weapon.pos[1]];
-    var weaponTopEdge = [weapon.pos[0] + 75, weapon.pos[1] - 150];
+    var weaponRightEdge = [weapon.pos[0] + 100, weapon.pos[1]];
+    var weaponTopEdge = [weapon.pos[0] + 50, weapon.pos[1] - 100];
 
     return (isLeftCollide(cardLeftEdge, weaponTopEdge, weaponRightEdge) ||
             isRightCollide(cardRightEdge, weaponTopEdge, weaponLeftEdge) ||

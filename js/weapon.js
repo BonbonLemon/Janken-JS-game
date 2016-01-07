@@ -3,11 +3,14 @@
     window.Janken = {};
   }
 
-  var Weapon = Janken.Weapon = function (pos) {
+  var Weapon = Janken.Weapon = function (pos, game, posId) {
+    this.startPos = pos.slice(0);
     this.pos = pos;
     this.dir = [0, -1];
     this.gesture = this.randomGesture();
     this.isFired = false;
+    this.game = game;
+    this.posId = posId;
   };
 
   Weapon.prototype.randomGesture = function () {
@@ -41,8 +44,13 @@
   };
 
   Weapon.prototype.move = function () {
+    if (this.pos[1] < -200) {
+      this.game.remove(this);
+      this.game.addWeapon(this.startPos, this.posId);
+    }
+
     if (this.isFired) {
-      this.pos[1] -= 10;
+      this.pos[1] -= 20;
     }
   };
 
