@@ -29,18 +29,23 @@
     ctx.moveTo(this.pos[0], this.pos[1]);
     ctx.lineTo(this.pos[0] + 100, this.pos[1]);
     ctx.lineTo(this.pos[0] + 50, this.pos[1] - 100);
+    var imageObj = new Image();
     switch (this.gesture) {
       case "ROCK":
         ctx.fillStyle = "#00ffff";
+        imageObj.src = './images/rock.png';
         break;
       case "PAPER":
         ctx.fillStyle = "#33ff33";
+        imageObj.src = './images/paper.png';
         break;
       case "SCISSORS":
         ctx.fillStyle = "#ff3333";
+        imageObj.src = './images/scissors.png';
         break;
     }
     ctx.fill();
+    ctx.drawImage(imageObj, this.pos[0] + 25, this.pos[1] - 75);
   };
 
   Weapon.prototype.move = function () {
