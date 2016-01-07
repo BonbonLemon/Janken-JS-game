@@ -5,18 +5,36 @@
     <title>Janken</title>
     <style>
     	* { padding: 0; margin: 0; }
-    	canvas { background: #ffff4d; display: block; margin: 0 auto; }
+    	canvas {
+        background: #ffff4d;
+        position: fixed;
+        left: 50%;
+        margin-left: -500px;
+      }
+      h2 {
+        position: fixed;
+        background: rgba(200, 200, 200, 0.7);
+        text-align: center;
+        left: 50%;
+        margin-left: -175px;
+        margin-top: 280px;
+        width: 250px;
+        padding: 40px;
+      }
+      .directions {
+        position: fixed;
+        margin-top: 800px;
+        left: 50%;
+        margin-left: -500px;
+        white-space: pre;
+      }
     </style>
   </head>
   <body>
     <h1 align="center">Janken</h1>
-
-    <canvas id="myCanvas" width="1000" height="800">
-      <div class="center-pieces">huifehwuih
-        <div class="score">0weguwhguiwh</div>
-        <div class="lives">5</div>
-      </div>
-    </canvas>
+    <canvas id="myCanvas" width="1000" height="800"></canvas>
+    <h2>Press "Space" to start</h2>
+    <div class="directions">Move: Left/Right Arrows       Space: Fire!</div>
     <script type="application/javascript" src="js/card.js"></script>
     <script type="application/javascript" src="js/weapon.js"></script>
     <script type="application/javascript" src="js/game.js"></script>
@@ -27,94 +45,8 @@
         var ctx = canvas.getContext("2d");
 
         var game = new Janken.Game();
-        new Janken.GameView(game, ctx).start();
+        new Janken.GameView(game, ctx).bindRestart();
       })();
-
-      // var canvas = document.getElementById("myCanvas");
-      // var ctx = canvas.getContext("2d");
-      //
-      // // NOTE: Ball
-      // var x = canvas.width/2;
-      // var y = canvas.height-30;
-      // var dx = 2;
-      // var dy = -2;
-      // var ballRadius = 10;
-      //
-      // // NOTE: Paddle
-      // var paddleHeight = 10;
-      // var paddleWidth = 75;
-      // var paddleX = (canvas.width-paddleWidth)/2;
-      // var rightPressed = false;
-      // var leftPressed = false;
-      //
-      // function drawBall() {
-      //   ctx.beginPath();
-      //   ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-      //   ctx.fillStyle = "#0095DD";
-      //   ctx.fill();
-      //   ctx.closePath();
-      // }
-      //
-      // function drawPaddle() {
-      //   if(rightPressed && paddleX < canvas.width-paddleWidth) {
-      //     paddleX += 7;
-      //   }
-      //   else if(leftPressed && paddleX > 0) {
-      //     paddleX -= 7;
-      //   }
-      //   ctx.beginPath();
-      //   ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-      //   ctx.fillStyle = "#0095DD";
-      //   ctx.fill();
-      //   ctx.closePath();
-      // }
-      //
-      // function draw() {
-      //   ctx.clearRect(0, 0, canvas.width, canvas.height);
-      //   drawBall();
-      //   drawPaddle();
-      //   x += dx;
-      //   y += dy;
-      //
-      //   if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
-      //     dx = -dx;
-      //   }
-      //
-      //   if(y + dy < ballRadius) {
-      //     dy = -dy;
-      //   } else if(y + dy > canvas.height-ballRadius) {
-      //     if(x > paddleX && x < paddleX + paddleWidth) {
-      //       dy = -dy;
-      //     }
-      //     else {
-      //       alert("GAME OVER");
-      //       document.location.reload();
-      //     }
-      //   }
-      // }
-      //
-      // document.addEventListener("keydown", keyDownHandler, false);
-      // document.addEventListener("keyup", keyUpHandler, false);
-      //
-      // function keyDownHandler(e) {
-      //   if(e.keyCode == 39) {
-      //     rightPressed = true;
-      //   }
-      //   else if(e.keyCode == 37) {
-      //     leftPressed = true;
-      //   }
-      // }
-      //
-      // function keyUpHandler(e) {
-      //   if(e.keyCode == 39) {
-      //     rightPressed = false;
-      //   }
-      //   else if(e.keyCode == 37) {
-      //     leftPressed = false;
-      //   }
-      // }
-      //
-      // setInterval(draw, 10);
     </script>
 
   </body>

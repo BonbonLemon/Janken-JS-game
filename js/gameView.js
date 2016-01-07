@@ -36,6 +36,18 @@
     }.bind(this);
   };
 
+  GameView.prototype.bindRestart = function () {
+    document.onkeydown = function (e) {
+      if (e.which === 32) {
+        document.onkeydown = null;
+        var h2 = document.getElementsByTagName('h2')[0];
+        h2.remove();
+        this.game = new Janken.Game();
+        this.start();
+      }
+    }.bind(this);
+  };
+
   GameView.prototype.drawScore = function () {
     this.ctx.clearRect(650, 200, 150, 100);
     this.ctx.font = "24px Arial";
@@ -84,7 +96,30 @@
     this.ctx.closePath();
   };
 
+  GameView.prototype.gameOver = function () {
+    window.clearInterval(this.startIntervalId);
+    window.clearInterval(this.timerIntervalId);
+    document.onkeydown = null;
+
+    var h2 = document.createElement('h2');
+    h2.className = "game-over";
+    var p1 = document.createElement('p');
+    p1.innerHTML = "GAME OVER";
+    var p2 = document.createElement('p');
+    p2.innerHTML = 'Press "space" to restart';
+    h2.appendChild(p1);
+    h2.appendChild(p2);
+    var body = document.getElementsByTagName('body')[0];
+    body.appendChild(h2);
+    this.bindRestart();
+  };
+
   GameView.prototype.start = function () {
+    this.ctx.clearRect(0, 0, 1000, 800);
+    this.selectedId = 1;
+    this.timeLeft = 30;
+    this.score = 0;
+    this.lives = 5;
     this.bindKeyHandlers();
     this.startTimer();
 
@@ -95,8 +130,7 @@
       this.drawLives();
 
       if (this.timeLeft <= 0 || this.lives <= 0) {
-        window.clearInterval(this.startIntervalId);
-        document.onkeydown = null;
+        this.gameOver();
       }
 
       this.game.weapons.forEach(function (weapon) {
@@ -128,7 +162,7 @@
   };
 
   GameView.prototype.startTimer = function () {
-    var timerId = setInterval(function () {
+    this.timerIntervalId = setInterval(function () {
       this.timeLeft--;
     }.bind(this), 1000);
   };
@@ -141,19 +175,16 @@
       this.game.remove(weapon);
       this.clearAreas(weapon, card);
       this.isNoCards();
-      console.log("tie");
     } else if (((cardVal + 1) % 3) === weaponVal) {
       this.score++;
       this.game.remove(card);
       this.game.remove(weapon);
       this.clearAreas(weapon, card);
       this.isNoCards();
-      console.log("win");
     } else {
       this.lives--;
       this.game.remove(weapon);
       this.clearAreas(weapon);
-      console.log("lose");
     }
 
     setTimeout(function () {
