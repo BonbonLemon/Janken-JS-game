@@ -232,7 +232,7 @@
   };
 
   GameView.prototype.clearAreas = function (weapon, card) {
-    this.ctx.clearRect(weapon.pos[0] - 1, weapon.pos[1] - 100, 103, 122);
+    this.ctx.clearRect(weapon.pos[0] - 1, weapon.pos[1] - 100, 103, 121);
     if (card) {this.ctx.clearRect(card.pos[0] - 1, card.pos[1] - 1, 102, 102);}
   };
 })();
