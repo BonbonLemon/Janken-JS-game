@@ -46,6 +46,17 @@
     }
     ctx.fill();
     ctx.drawImage(imageObj, this.pos[0] + 25, this.pos[1] - 75);
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.moveTo(this.pos[0], this.pos[1]);
+    ctx.lineTo(this.pos[0] + 100, this.pos[1]);
+    ctx.lineTo(this.pos[0] + 50, this.pos[1] - 100);
+    ctx.lineTo(this.pos[0], this.pos[1]);
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.closePath();
   };
 
   Weapon.prototype.move = function () {

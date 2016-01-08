@@ -51,22 +51,54 @@
   GameView.prototype.drawScore = function () {
     this.ctx.clearRect(650, 200, 150, 100);
     this.ctx.font = "24px Arial";
-    this.ctx.fillStyle = "#0095DD";
+    this.ctx.fillStyle = "#000000";
     this.ctx.fillText("Score: " + this.score, 650, 300);
+
+    this.ctx.beginPath();
+    this.ctx.rect(640, 255, 125, 70);
+    this.ctx.strokeStyle = "#660066";
+    this.ctx.lineWidth = 6;
+    this.ctx.stroke();
+    this.ctx.closePath();
   };
 
   GameView.prototype.drawLives = function () {
     this.ctx.clearRect(450, 200, 150, 100);
     this.ctx.font = "24px Arial";
-    this.ctx.fillStyle = "#0095DD";
-    this.ctx.fillText("Lives: " + this.lives, 450, 300);
+    this.ctx.fillStyle = "#000000";
+    this.ctx.fillText(this.lives, 510, 300);
+
+    this.ctx.beginPath();
+    this.ctx.moveTo(450, 315);
+    this.ctx.lineTo(450 + 50, 315);
+    this.ctx.lineTo(450 + 25, 315 - 50);
+    this.ctx.fillStyle = "#000000";
+    this.ctx.fill();
+
+    this.ctx.beginPath();
+    this.ctx.rect(440, 255, 100, 70);
+    this.ctx.strokeStyle = "#660066";
+    this.ctx.lineWidth = 6;
+    this.ctx.stroke();
+    this.ctx.closePath();
   };
 
   GameView.prototype.drawTime = function () {
     this.ctx.clearRect(250, 200, 150, 100);
     this.ctx.font = "24px Arial";
-    this.ctx.fillStyle = "#0095DD";
-    this.ctx.fillText("Time: " + this.timeLeft, 250, 300);
+    this.ctx.fillStyle = "#000000";
+    this.ctx.fillText(this.timeLeft, 300, 300);
+
+    var imageObj = new Image();
+    imageObj.src = './images/timer.png';
+    this.ctx.drawImage(imageObj, 250, 265);
+
+    this.ctx.beginPath();
+    this.ctx.rect(240, 255, 100, 70);
+    this.ctx.strokeStyle = "#660066";
+    this.ctx.lineWidth = 6;
+    this.ctx.stroke();
+    this.ctx.closePath();
   };
 
   GameView.prototype.clearSelectorArea = function () {
@@ -135,14 +167,14 @@
 
       this.game.weapons.forEach(function (weapon) {
         if (weapon) {
-          this.ctx.clearRect(weapon.pos[0], weapon.pos[1] - 20, 100, 20);
+          this.ctx.clearRect(weapon.pos[0] - 1, weapon.pos[1] - 20, 103, 21);
           weapon.move();
           weapon.draw(this.ctx);
         }
       }.bind(this));
 
       this.game.cards.forEach(function (card) {
-        this.ctx.clearRect(card.pos[0], card.pos[1], 100, 100);
+        this.ctx.clearRect(card.pos[0] - 1, card.pos[1] - 1, 102, 102);
         card.move();
         card.draw(this.ctx);
       }.bind(this));
@@ -200,7 +232,7 @@
   };
 
   GameView.prototype.clearAreas = function (weapon, card) {
-    this.ctx.clearRect(weapon.pos[0], weapon.pos[1] - 100, 100, 120);
-    if (card) {this.ctx.clearRect(card.pos[0], card.pos[1], 100, 100);}
+    this.ctx.clearRect(weapon.pos[0] - 1, weapon.pos[1] - 100, 103, 122);
+    if (card) {this.ctx.clearRect(card.pos[0] - 1, card.pos[1] - 1, 102, 102);}
   };
 })();

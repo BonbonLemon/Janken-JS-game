@@ -31,6 +31,11 @@
     ctx.fill();
     ctx.drawImage(imageObj, this.pos[0] + 23, this.pos[1] + 15);
     ctx.closePath();
+
+    ctx.beginPath();
+    ctx.rect(this.pos[0], this.pos[1], 100, 100);
+    ctx.stroke();
+    ctx.closePath();
   };
 
   Card.prototype.move = function () {
