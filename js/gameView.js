@@ -36,12 +36,72 @@
     }.bind(this);
   };
 
-  GameView.prototype.bindRestart = function () {
+  GameView.prototype.bindTutorial1 = function () {
     document.onkeydown = function (e) {
       if (e.which === 32) {
         document.onkeydown = null;
         var h2 = document.getElementsByTagName('h2')[0];
         h2.remove();
+        var tutorialImage1 = new Image();
+        tutorialImage1.src = './images/tutorial1.png';
+        tutorialImage1.onload = function () {
+          this.ctx.drawImage(tutorialImage1, 0 , 0);
+        }.bind(this);
+        this.bindTutorial2();
+      }
+    }.bind(this);
+  };
+
+  GameView.prototype.bindTutorial2 = function () {
+    document.onkeydown = function (e) {
+      if (e.which === 32) {
+        document.onkeydown = null;
+        var tutorialImage1 = new Image();
+        tutorialImage1.src = './images/tutorial2.png';
+        tutorialImage1.onload = function () {
+          this.ctx.drawImage(tutorialImage1, 0 , 0);
+        }.bind(this);
+        this.bindTutorial3();
+      }
+    }.bind(this);
+  };
+
+  GameView.prototype.bindTutorial3 = function () {
+    document.onkeydown = function (e) {
+      if (e.which === 32) {
+        document.onkeydown = null;
+        var tutorialImage1 = new Image();
+        tutorialImage1.src = './images/tutorial3.png';
+        tutorialImage1.onload = function () {
+          this.ctx.drawImage(tutorialImage1, 0 , 0);
+        }.bind(this);
+        this.bindTutorial4();
+      }
+    }.bind(this);
+  };
+
+  GameView.prototype.bindTutorial4 = function () {
+    document.onkeydown = function (e) {
+      if (e.which === 32) {
+        document.onkeydown = null;
+        var tutorialImage1 = new Image();
+        tutorialImage1.src = './images/tutorial4.png';
+        tutorialImage1.onload = function () {
+          this.ctx.drawImage(tutorialImage1, 0 , 0);
+        }.bind(this);
+        this.bindRestart();
+      }
+    }.bind(this);
+  };
+
+  GameView.prototype.bindRestart = function () {
+    document.onkeydown = function (e) {
+      if (e.which === 32) {
+        document.onkeydown = null;
+        try {
+          var h2 = document.getElementsByTagName('h2')[0];
+          h2.remove();
+        } catch (err) {}
         this.game = new Janken.Game();
         this.start();
       }
