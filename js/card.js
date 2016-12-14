@@ -101,6 +101,6 @@
 
   var isFrontCollide = function (cardLeftEdge, cardRightEdge, weaponTopEdge) {
     return (weaponTopEdge[0] >= cardLeftEdge[0] && weaponTopEdge[0] <= cardRightEdge[0] &&
-            weaponTopEdge[1] <= cardLeftEdge[1]);
+            weaponTopEdge[1] <= cardLeftEdge[1] && weaponTopEdge[1] >= cardLeftEdge[1] - 100);
   };
 })();
