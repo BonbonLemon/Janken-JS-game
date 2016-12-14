@@ -4,7 +4,7 @@
   }
 
   var Card = Janken.Card = function (game) {
-    this.pos = [100, 100];
+    this.pos = [100, 50];
     this.dir = [0, 1];
     this.gesture = this.randomGesture();
     this.game = game;
@@ -40,16 +40,16 @@
 
   Card.prototype.move = function () {
     switch (this.pos.toString()) {
-      case "100,100":
+      case "100,50":
         this.dir = [0, 1];
         break;
-      case "100,400":
+      case "100,350":
         this.dir = [1, 0];
         break;
-      case "800,400":
+      case "800,350":
         this.dir = [0, -1];
         break;
-      case "800,100":
+      case "800,50":
         this.dir = [-1, 0];
         break;
     }

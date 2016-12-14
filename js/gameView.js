@@ -109,13 +109,13 @@
   };
 
   GameView.prototype.drawScore = function () {
-    this.ctx.clearRect(650, 200, 150, 100);
+    this.ctx.clearRect(650, 150, 150, 100);
     this.ctx.font = "24px Arial";
     this.ctx.fillStyle = "#000000";
-    this.ctx.fillText("Score: " + this.score, 650, 300);
+    this.ctx.fillText("Score: " + this.score, 650, 250);
 
     this.ctx.beginPath();
-    this.ctx.rect(640, 255, 125, 70);
+    this.ctx.rect(640, 205, 125, 70);
     this.ctx.strokeStyle = "#660066";
     this.ctx.lineWidth = 6;
     this.ctx.stroke();
@@ -123,20 +123,20 @@
   };
 
   GameView.prototype.drawLives = function () {
-    this.ctx.clearRect(450, 200, 150, 100);
+    this.ctx.clearRect(450, 150, 150, 100);
     this.ctx.font = "24px Arial";
     this.ctx.fillStyle = "#000000";
-    this.ctx.fillText(this.lives, 510, 300);
+    this.ctx.fillText(this.lives, 510, 250);
 
     this.ctx.beginPath();
-    this.ctx.moveTo(450, 315);
-    this.ctx.lineTo(450 + 50, 315);
-    this.ctx.lineTo(450 + 25, 315 - 50);
+    this.ctx.moveTo(450, 265);
+    this.ctx.lineTo(450 + 50, 265);
+    this.ctx.lineTo(450 + 25, 265 - 50);
     this.ctx.fillStyle = "#000000";
     this.ctx.fill();
 
     this.ctx.beginPath();
-    this.ctx.rect(440, 255, 100, 70);
+    this.ctx.rect(440, 205, 100, 70);
     this.ctx.strokeStyle = "#660066";
     this.ctx.lineWidth = 6;
     this.ctx.stroke();
@@ -144,17 +144,17 @@
   };
 
   GameView.prototype.drawTime = function () {
-    this.ctx.clearRect(250, 200, 150, 100);
+    this.ctx.clearRect(250, 150, 150, 100);
     this.ctx.font = "24px Arial";
     this.ctx.fillStyle = "#000000";
-    this.ctx.fillText(this.timeLeft, 300, 300);
+    this.ctx.fillText(this.timeLeft, 300, 250);
 
     var imageObj = new Image();
     imageObj.src = './images/timer.png';
-    this.ctx.drawImage(imageObj, 250, 265);
+    this.ctx.drawImage(imageObj, 250, 215);
 
     this.ctx.beginPath();
-    this.ctx.rect(240, 255, 100, 70);
+    this.ctx.rect(240, 205, 100, 70);
     this.ctx.strokeStyle = "#660066";
     this.ctx.lineWidth = 6;
     this.ctx.stroke();
