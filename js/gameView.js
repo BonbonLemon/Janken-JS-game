@@ -43,7 +43,7 @@
         var h2 = document.getElementsByTagName('h2')[0];
         h2.remove();
         var tutorialImage1 = new Image();
-        tutorialImage1.src = './images/tutorial1.png';
+        tutorialImage1.src = './assets/images/tutorial1.png';
         tutorialImage1.onload = function () {
           this.ctx.drawImage(tutorialImage1, 0 , 0);
         }.bind(this);
@@ -57,7 +57,7 @@
       if (e.which === 32) {
         document.onkeydown = null;
         var tutorialImage1 = new Image();
-        tutorialImage1.src = './images/tutorial2.png';
+        tutorialImage1.src = './assets/images/tutorial2.png';
         tutorialImage1.onload = function () {
           this.ctx.drawImage(tutorialImage1, 0 , 0);
         }.bind(this);
@@ -71,7 +71,7 @@
       if (e.which === 32) {
         document.onkeydown = null;
         var tutorialImage1 = new Image();
-        tutorialImage1.src = './images/tutorial3.png';
+        tutorialImage1.src = './assets/images/tutorial3.png';
         tutorialImage1.onload = function () {
           this.ctx.drawImage(tutorialImage1, 0 , 0);
         }.bind(this);
@@ -85,7 +85,7 @@
       if (e.which === 32) {
         document.onkeydown = null;
         var tutorialImage1 = new Image();
-        tutorialImage1.src = './images/tutorial4.png';
+        tutorialImage1.src = './assets/images/tutorial4.png';
         tutorialImage1.onload = function () {
           this.ctx.drawImage(tutorialImage1, 0 , 0);
         }.bind(this);
@@ -112,10 +112,10 @@
     this.ctx.clearRect(650, 150, 150, 100);
     this.ctx.font = "24px Arial";
     this.ctx.fillStyle = "#000000";
-    this.ctx.fillText("Score: " + this.score, 650, 250);
+    this.ctx.fillText("Score: " + this.score, 640, 250);
 
     this.ctx.beginPath();
-    this.ctx.rect(640, 205, 125, 70);
+    this.ctx.rect(630, 205, 130, 70);
     this.ctx.strokeStyle = "#660066";
     this.ctx.lineWidth = 6;
     this.ctx.stroke();
@@ -150,7 +150,7 @@
     this.ctx.fillText(this.timeLeft, 300, 250);
 
     var imageObj = new Image();
-    imageObj.src = './images/timer.png';
+    imageObj.src = './assets/images/timer.png';
     this.ctx.drawImage(imageObj, 250, 215);
 
     this.ctx.beginPath();
@@ -158,6 +158,19 @@
     this.ctx.strokeStyle = "#660066";
     this.ctx.lineWidth = 6;
     this.ctx.stroke();
+    this.ctx.closePath();
+  };
+
+  GameView.prototype.drawBoard = function () {
+    this.ctx.beginPath();
+    this.ctx.rect(85, 35, 830, 430);
+    this.ctx.strokeStyle = "#da499c";
+    this.ctx.lineWidth = 6;
+    this.ctx.stroke();
+
+    this.ctx.rect(215, 165, 570, 170);
+    this.ctx.stroke();
+
     this.ctx.closePath();
   };
 
@@ -215,11 +228,18 @@
     this.bindKeyHandlers();
     this.startTimer();
 
+    if (!this.music) {
+      this.music = new Audio("./assets/sounds/music.wav");
+      this.music.loop = true;
+      this.music.play();
+    }
+
     this.startIntervalId = setInterval(function () {
       this.displaySelected();
       this.drawScore();
       this.drawTime();
       this.drawLives();
+      this.drawBoard();
 
       if (this.timeLeft <= 0 || this.lives <= 0) {
         this.gameOver();

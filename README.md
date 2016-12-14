@@ -1,6 +1,6 @@
 # Janken
 
-![Alt text](/images/demo_pic.png?raw=true)
+![Alt text](/assets/images/demo_pic.png?raw=true)
 
 [Janken][janken] is a dynamic twist on the classic game of Rock-Paper-Scissors.
 Janken is a frontend browser game built with Javascript and Canvas.

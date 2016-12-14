@@ -33,15 +33,15 @@
     switch (this.gesture) {
       case "ROCK":
         ctx.fillStyle = "#00ffff";
-        imageObj.src = './images/rock.png';
+        imageObj.src = './assets/images/rock.png';
         break;
       case "PAPER":
         ctx.fillStyle = "#33ff33";
-        imageObj.src = './images/paper.png';
+        imageObj.src = './assets/images/paper.png';
         break;
       case "SCISSORS":
         ctx.fillStyle = "#ff3333";
-        imageObj.src = './images/scissors.png';
+        imageObj.src = './assets/images/scissors.png';
         break;
     }
     ctx.fill();
