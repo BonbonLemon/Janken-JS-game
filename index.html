@@ -58,19 +58,8 @@
     <script type="application/javascript" src="js/weapon.js"></script>
     <script type="application/javascript" src="js/game.js"></script>
     <script type="application/javascript" src="js/gameView.js"></script>
-    <script>
-      (function () {
-        window.onkeydown = function (e) {
-          if ((e.keyCode == 32 || e.keyCode == 37 || e.keyCode == 39) && e.target == document.body) {
-            e.preventDefault();
-          }
-        }
-        var canvas = document.getElementById("myCanvas");
-        var ctx = canvas.getContext("2d");
+    <script type="application/javascript" src="js/main.js"></script>
 
-        var game = new Janken.Game();
-        new Janken.GameView(game, ctx).bindTutorial1();
-      })();
     </script>
 
   </body>

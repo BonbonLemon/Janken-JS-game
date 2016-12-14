@@ -53,8 +53,8 @@
         this.dir = [-1, 0];
         break;
     }
-    this.pos[0] += this.dir[0] * 10;
-    this.pos[1] += this.dir[1] * 10;
+    this.pos[0] += this.dir[0] * 5;
+    this.pos[1] += this.dir[1] * 5;
   };
 
   Card.prototype.randomGesture = function () {

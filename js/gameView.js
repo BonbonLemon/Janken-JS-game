@@ -250,7 +250,7 @@
           }
         }
       }.bind(this));
-    }.bind(this), 15);
+    }.bind(this), 12);
   };
 
   GameView.prototype.startTimer = function () {

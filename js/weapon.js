@@ -66,7 +66,7 @@
     }
 
     if (this.isFired) {
-      this.pos[1] -= 20;
+      this.pos[1] -= 15;
     }
   };
 

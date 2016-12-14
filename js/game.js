@@ -29,7 +29,7 @@
       if (++x === 10) {
         window.clearInterval(intervalID);
       }
-    }.bind(this), 200);
+    }.bind(this), 300);
   };
 
   Game.prototype.addWeapons = function () {

@@ -42,3 +42,16 @@
 //   x += dx;
 //   y += dy;
 // }
+
+(function () {
+  window.onkeydown = function (e) {
+    if ((e.keyCode == 32 || e.keyCode == 37 || e.keyCode == 39) && e.target == document.body) {
+      e.preventDefault();
+    }
+  }
+  var canvas = document.getElementById("myCanvas");
+  var ctx = canvas.getContext("2d");
+
+  var game = new Janken.Game();
+  new Janken.GameView(game, ctx).bindTutorial1();
+})();
