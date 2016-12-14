@@ -11,6 +11,7 @@
     this.isFired = false;
     this.game = game;
     this.posId = posId;
+    this.fireSound = new Audio("./assets/sounds/pewpew.wav");
   };
 
   Weapon.prototype.randomGesture = function () {
@@ -71,6 +72,9 @@
   };
 
   Weapon.prototype.fire = function () {
-    this.isFired = true;
+    if (!this.isFired) {
+      this.fireSound.play();
+      this.isFired = true;
+    }
   };
 })();
