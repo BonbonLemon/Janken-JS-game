@@ -10,6 +10,11 @@
     this.timeLeft = 30;
     this.score = 0;
     this.lives = 5;
+
+    this.winSound = new Audio("./assets/sounds/correct.wav");
+    this.winSound.volume = 0.7;
+    this.tieSound = new Audio("./assets/sounds/tie.wav");
+    this.loseSound = new Audio("./assets/sounds/lose.wav");
   };
 
   GESTURES = {
@@ -231,6 +236,7 @@
 
     if (!this.music) {
       this.music = new Audio("./assets/sounds/music.wav");
+      this.music.volume = 0.7;
       this.music.loop = true;
       this.music.play();
     }
@@ -283,18 +289,27 @@
   GameView.prototype.handleCollision = function (weapon, card) {
     cardVal = GESTURES[card.gesture];
     weaponVal = GESTURES[weapon.gesture];
-    if (cardVal === weaponVal) {
+    if (cardVal === weaponVal) { // NOTE: Tie
+      this.tieSound.currentTime = 0.13;
+      this.tieSound.play();
+
       this.game.remove(card);
       this.game.remove(weapon);
       this.clearAreas(weapon, card);
       this.isNoCards();
-    } else if (((cardVal + 1) % 3) === weaponVal) {
+    } else if (((cardVal + 1) % 3) === weaponVal) { // NOTE: Win
+      this.winSound.currentTime = 0;
+      this.winSound.play();
+
       this.score++;
       this.game.remove(card);
       this.game.remove(weapon);
       this.clearAreas(weapon, card);
       this.isNoCards();
-    } else {
+    } else { // NOTE: Lose
+      this.loseSound.currentTime = 0;
+      this.loseSound.play();
+
       this.lives--;
       this.game.remove(weapon);
       this.clearAreas(weapon);
