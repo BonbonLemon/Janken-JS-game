@@ -225,6 +225,7 @@
     this.timeLeft = 30;
     this.score = 0;
     this.lives = 5;
+    this.game.start();
     this.bindKeyHandlers();
     this.startTimer();
 
