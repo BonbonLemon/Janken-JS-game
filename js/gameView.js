@@ -268,9 +268,9 @@
 
       this.game.weapons.forEach(function (weapon) {
         if (weapon) {
-          if (weapon.isFired) {
+          if (weapon.isFired && weapon.collision) {
             this.game.cards.forEach(function (card) {
-              if (card.isCollideWith(weapon)) {
+              if (card.collision && card.isCollideWith(weapon)) {
                 this.handleCollision(weapon, card);
               }
             }.bind(this));
@@ -311,8 +311,14 @@
       this.loseSound.play();
 
       this.lives--;
-      this.game.remove(weapon);
-      this.clearAreas(weapon);
+
+      weapon.dir = weapon.bounceDir;
+      weapon.collision = false;
+
+      setTimeout(function () {
+        this.game.remove(weapon);
+        this.clearAreas(weapon);
+      }.bind(this), 300);
     }
 
     setTimeout(function () {

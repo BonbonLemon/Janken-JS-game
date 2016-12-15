@@ -11,6 +11,8 @@
     this.isFired = false;
     this.game = game;
     this.posId = posId;
+    this.collision = true;
+    this.bounceDir = [0, 0];
     this.fireSound = new Audio("./assets/sounds/pewpew.wav");
   };
 
@@ -67,12 +69,13 @@
     }
 
     if (this.isFired) {
-      this.pos[1] -= 15;
+      this.pos[0] += this.dir[0] * 15;
+      this.pos[1] += this.dir[1] * 15;
     }
   };
 
   Weapon.prototype.fire = function () {
-    if (!this.isFired) {
+    if (this.collision && !this.isFired) {
       this.fireSound.play();
       this.isFired = true;
     }

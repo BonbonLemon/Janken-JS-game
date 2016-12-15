@@ -8,6 +8,8 @@
     this.dir = [0, 1];
     this.gesture = this.randomGesture();
     this.game = game;
+    this.collision = true;
+    this.bounceDir = [0, 0];
   }
 
   Card.prototype.draw = function (ctx) {
@@ -39,19 +41,21 @@
   };
 
   Card.prototype.move = function () {
-    switch (this.pos.toString()) {
-      case "100,50":
+    if (this.collision) {
+      switch (this.pos.toString()) {
+        case "100,50":
         this.dir = [0, 1];
         break;
-      case "100,350":
+        case "100,350":
         this.dir = [1, 0];
         break;
-      case "800,350":
+        case "800,350":
         this.dir = [0, -1];
         break;
-      case "800,50":
+        case "800,50":
         this.dir = [-1, 0];
         break;
+      }
     }
     this.pos[0] += this.dir[0] * 5;
     this.pos[1] += this.dir[1] * 5;
@@ -76,9 +80,25 @@
     var weaponRightEdge = [weapon.pos[0] + 100, weapon.pos[1]];
     var weaponTopEdge = [weapon.pos[0] + 50, weapon.pos[1] - 100];
 
-    return (isLeftCollide(cardLeftEdge, weaponTopEdge, weaponRightEdge) ||
-            isRightCollide(cardRightEdge, weaponTopEdge, weaponLeftEdge) ||
-            isFrontCollide(cardLeftEdge, cardRightEdge, weaponTopEdge));
+    if (isLeftCollide(cardLeftEdge, weaponTopEdge, weaponRightEdge)) {
+      this.bounceDir = [1, -1];
+      weapon.bounceDir = [-1, 1];
+      return true;
+    } else if (isRightCollide(cardRightEdge, weaponTopEdge, weaponLeftEdge)) {
+      this.bounceDir = [-1, -1];
+      weapon.bounceDir = [1, 1];
+      return true;
+    } else if (isFrontCollide(cardLeftEdge, cardRightEdge, weaponTopEdge)) {
+      this.bounceDir = [0, -1];
+      weapon.bounceDir = [0, 1];
+      return true;
+    } else {
+      return false;
+    }
+
+    // return (isLeftCollide(cardLeftEdge, weaponTopEdge, weaponRightEdge) ||
+    //         isRightCollide(cardRightEdge, weaponTopEdge, weaponLeftEdge) ||
+    //         isFrontCollide(cardLeftEdge, cardRightEdge, weaponTopEdge));
   };
 
   var isLeftCollide = function (cardLeftEdge, weaponTopEdge, weaponRightEdge) {
