@@ -10,9 +10,14 @@
     this.game = game;
     this.collision = true;
     this.bounceDir = [0, 0];
+    this.show = true;
   }
 
   Card.prototype.draw = function (ctx) {
+    if (!this.show) {
+      return;
+    }
+
     ctx.beginPath();
     ctx.rect(this.pos[0], this.pos[1], 100, 100);
     var imageObj = new Image();
@@ -82,15 +87,15 @@
 
     if (isLeftCollide(cardLeftEdge, weaponTopEdge, weaponRightEdge)) {
       this.bounceDir = [3, -3];
-      weapon.bounceDir = [-0.7, 0.7];
+      weapon.bounceDir = [-1, 1];
       return true;
     } else if (isRightCollide(cardRightEdge, weaponTopEdge, weaponLeftEdge)) {
       this.bounceDir = [-3, -3];
-      weapon.bounceDir = [0.7, 0.7];
+      weapon.bounceDir = [1, 1];
       return true;
     } else if (isFrontCollide(cardLeftEdge, cardRightEdge, weaponTopEdge)) {
       this.bounceDir = [0, -3.5];
-      weapon.bounceDir = [0, 1];
+      weapon.bounceDir = [0, 1.5];
       return true;
     } else {
       return false;

@@ -300,10 +300,21 @@
       this.tieSound.currentTime = 0.13;
       this.tieSound.play();
 
-      this.game.remove(card);
-      this.game.remove(weapon);
-      this.clearAreas(weapon, card);
-      this.isNoCards();
+      card.dir = [0, 0];
+      weapon.dir = [0, 0];
+      card.collision = false;
+      weapon.collision = false;
+      this.flashIntervalId = setInterval(function () {
+        card.show = !card.show;
+      }.bind(this), 100);
+
+      setTimeout(function () {
+        window.clearInterval(this.flashIntervalId);
+        this.game.remove(card);
+        this.game.remove(weapon);
+        this.clearAreas(weapon, card);
+        this.isNoCards();
+      }.bind(this), 500);
     } else if (((cardVal + 1) % 3) === weaponVal) { // NOTE: Win
       this.winSound.currentTime = 0;
       this.winSound.play();
