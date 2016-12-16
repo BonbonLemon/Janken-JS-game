@@ -63,7 +63,7 @@
   };
 
   Weapon.prototype.move = function () {
-    if (this.pos[1] < -200) {
+    if (this.pos[1] < -200 || this.pos[1] > 1000) {
       this.game.remove(this);
       this.game.addWeapon(this.startPos, this.posId);
     }

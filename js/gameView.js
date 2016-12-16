@@ -254,7 +254,14 @@
 
       this.game.weapons.forEach(function (weapon) {
         if (weapon) {
-          this.ctx.clearRect(weapon.pos[0] - 1, weapon.pos[1] - 20, 103, 21);
+          this.ctx.beginPath();
+          this.ctx.moveTo(weapon.pos[0] - 3, weapon.pos[1] + 2);
+          this.ctx.lineTo(weapon.pos[0] + 103, weapon.pos[1] + 2);
+          this.ctx.lineTo(weapon.pos[0] + 50, weapon.pos[1] - 104);
+          this.ctx.fillStyle = "#ffff4d";
+          this.ctx.fill();
+          this.ctx.closePath();
+
           weapon.move();
           weapon.draw(this.ctx);
         }
@@ -302,10 +309,18 @@
       this.winSound.play();
 
       this.score++;
-      this.game.remove(card);
-      this.game.remove(weapon);
-      this.clearAreas(weapon, card);
-      this.isNoCards();
+
+      card.dir = card.bounceDir;
+      card.collision = false;
+      weapon.dir = [0, 0];
+      weapon.collision = false;
+
+      setTimeout(function () {
+        this.game.remove(card);
+        this.game.remove(weapon);
+        this.clearAreas(weapon, card);
+        this.isNoCards();
+      }.bind(this), 500);
     } else { // NOTE: Lose
       this.loseSound.currentTime = 0;
       this.loseSound.play();
@@ -314,11 +329,6 @@
 
       weapon.dir = weapon.bounceDir;
       weapon.collision = false;
-
-      setTimeout(function () {
-        this.game.remove(weapon);
-        this.clearAreas(weapon);
-      }.bind(this), 300);
     }
 
     setTimeout(function () {

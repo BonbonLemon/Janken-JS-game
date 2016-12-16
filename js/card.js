@@ -81,15 +81,15 @@
     var weaponTopEdge = [weapon.pos[0] + 50, weapon.pos[1] - 100];
 
     if (isLeftCollide(cardLeftEdge, weaponTopEdge, weaponRightEdge)) {
-      this.bounceDir = [1, -1];
-      weapon.bounceDir = [-1, 1];
+      this.bounceDir = [3, -3];
+      weapon.bounceDir = [-0.7, 0.7];
       return true;
     } else if (isRightCollide(cardRightEdge, weaponTopEdge, weaponLeftEdge)) {
-      this.bounceDir = [-1, -1];
-      weapon.bounceDir = [1, 1];
+      this.bounceDir = [-3, -3];
+      weapon.bounceDir = [0.7, 0.7];
       return true;
     } else if (isFrontCollide(cardLeftEdge, cardRightEdge, weaponTopEdge)) {
-      this.bounceDir = [0, -1];
+      this.bounceDir = [0, -3.5];
       weapon.bounceDir = [0, 1];
       return true;
     } else {
