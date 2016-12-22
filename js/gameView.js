@@ -10,6 +10,8 @@
     this.timeLeft = 30;
     this.score = 0;
     this.lives = 5;
+    this.isGameOver = true;
+    this.isStarted = false;
 
     this.winSound = new Audio("./assets/sounds/correct.wav");
     this.winSound.volume = 0.7;
@@ -219,7 +221,8 @@
   };
 
   GameView.prototype.gameOver = function () {
-    window.clearInterval(this.startIntervalId);
+    // window.clearInterval(this.startIntervalId);
+    this.isGameOver = true;
     window.clearInterval(this.timerIntervalId);
     document.onkeydown = null;
 
@@ -237,6 +240,7 @@
   };
 
   GameView.prototype.start = function () {
+    this.isGameOver = false;
     this.ctx.clearRect(0, 0, 1000, 800);
     this.selectedId = 1;
     this.timeLeft = 30;
@@ -253,50 +257,53 @@
       this.music.play();
     }
 
-    this.startIntervalId = setInterval(function () {
-      this.displaySelected();
-      this.drawScore();
-      this.drawTime();
-      this.drawLives();
-      this.drawBoard();
+    if (!this.isStarted) {
+      this.startIntervalId = setInterval(function () {
+        this.isStarted = true;
+        this.displaySelected();
+        this.drawScore();
+        this.drawTime();
+        this.drawLives();
+        this.drawBoard();
 
-      if (this.timeLeft <= 0 || this.lives <= 0) {
-        this.gameOver();
-      }
-
-      this.game.weapons.forEach(function (weapon) {
-        if (weapon) {
-          this.ctx.beginPath();
-          this.ctx.moveTo(weapon.pos[0] - 3, weapon.pos[1] + 2);
-          this.ctx.lineTo(weapon.pos[0] + 103, weapon.pos[1] + 2);
-          this.ctx.lineTo(weapon.pos[0] + 50, weapon.pos[1] - 104);
-          this.ctx.fillStyle = "#ffff4d";
-          this.ctx.fill();
-          this.ctx.closePath();
-
-          weapon.move();
-          weapon.draw(this.ctx);
+        if (!this.isGameOver && (this.timeLeft <= 0 || this.lives <= 0)) {
+          this.gameOver();
         }
-      }.bind(this));
 
-      this.game.cards.forEach(function (card) {
-        this.ctx.clearRect(card.pos[0] - 1, card.pos[1] - 1, 102, 102);
-        card.move();
-        card.draw(this.ctx);
-      }.bind(this));
+        this.game.weapons.forEach(function (weapon) {
+          if (weapon) {
+            this.ctx.beginPath();
+            this.ctx.moveTo(weapon.pos[0] - 3, weapon.pos[1] + 2);
+            this.ctx.lineTo(weapon.pos[0] + 103, weapon.pos[1] + 2);
+            this.ctx.lineTo(weapon.pos[0] + 50, weapon.pos[1] - 104);
+            this.ctx.fillStyle = "#ffff4d";
+            this.ctx.fill();
+            this.ctx.closePath();
 
-      this.game.weapons.forEach(function (weapon) {
-        if (weapon) {
-          if (weapon.isFired && weapon.collision) {
-            this.game.cards.forEach(function (card) {
-              if (card.collision && card.isCollideWith(weapon)) {
-                this.handleCollision(weapon, card);
-              }
-            }.bind(this));
+            weapon.move();
+            weapon.draw(this.ctx);
           }
-        }
-      }.bind(this));
-    }.bind(this), 12);
+        }.bind(this));
+
+        this.game.cards.forEach(function (card) {
+          this.ctx.clearRect(card.pos[0] - 1, card.pos[1] - 1, 102, 102);
+          card.move();
+          card.draw(this.ctx);
+        }.bind(this));
+
+        this.game.weapons.forEach(function (weapon) {
+          if (weapon) {
+            if (weapon.isFired && weapon.collision) {
+              this.game.cards.forEach(function (card) {
+                if (card.collision && card.isCollideWith(weapon)) {
+                  this.handleCollision(weapon, card);
+                }
+              }.bind(this));
+            }
+          }
+        }.bind(this));
+      }.bind(this), 12);
+    }
   };
 
   GameView.prototype.startTimer = function () {
