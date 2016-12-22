@@ -4,75 +4,46 @@
     <meta charset="utf-8" />
     <title>Janken</title>
     <link rel="icon" type="image/x-icon" href="favicon.png">
-    <style>
-    	* { padding: 0; margin: 0; }
-    	canvas {
-        background: #ffff4d;
-        display: block;
-        margin: 0 auto;
-      }
-      h1 {
-        display: block;
-        margin: 0 auto;
-        text-align: center;
-      }
-      h2 {
-        position: relative;
-        background: rgba(200, 200, 200, 0.7);
-        text-align: center;
-        left: 50%;
-        margin-left: -165px;
-        margin-top: -750px;
-        width: 250px;
-        padding: 40px;
-      }
-      .directions {
-        position: relative;
-        left: 50%;
-        width: 1000px;
-        margin-left: -500px;
-        white-space: pre;
-      }
-      body {
-        min-height: 1200px;
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <h1>Janken (Ro Sham Bo)</h1>
     <canvas id="myCanvas" width="1000" height="800"></canvas>
-    <div class="directions">
-      <span>Move: Left/Right Arrows       Space: Fire!</span>
-      <span>Instructions: Several cards with either Rock, Paper, or Scissors hand gestures on</span>
-      <span>them fly around the top screen. At the bottom of the screen are 3 cards, also with</span>
-      <span>Rock/Paper/Scissors hand gestures on them. You earn points by shooting the</span>
-      <span>hands at the bottom into the hands spinning around. You have a time limit and</span>
-      <span>only 5 hands. The rules of Rock, Paper, Scissors apply:</span>
-      <span>  -Winning removes the card and rewards you 1 points.</span>
-      <span>  -Ties removes the card but rewards you no points.</span>
-      <span>  -Losing does not remove the card and you lose a life.</span>
-      <span>  -Missing the cards completely does nothing.</span>
-      <span>If you remove all the cards, more will appear and you are given 10 extra seconds.</span>
+    <div id="menu">
+      <h2 id="title">Janken (Ro Sham Bo)</h2>
+      <img id="rsp" src="./assets/images/rock-paper-scissors.png">
+      <ul id="menu-select">
+        <li class="menu-option" onclick="playGame()">Play</li>
+        <li class="menu-option">Instructions</li>
+        <li class="menu-option">Settings</li>
+      </ul>
     </div>
-    <h2>Press "Space" to start</h2>
+    <link href='https://fonts.googleapis.com/css?family=Merienda' rel='stylesheet' type='text/css'>
+    <!-- <script type="text/javascript"></script> -->
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.js"
+      integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+      crossorigin="anonymous"></script>
     <script type="application/javascript" src="js/card.js"></script>
     <script type="application/javascript" src="js/weapon.js"></script>
     <script type="application/javascript" src="js/game.js"></script>
     <script type="application/javascript" src="js/gameView.js"></script>
-    <!-- <script type="application/javascript" src="js/main.js"></script> -->
     <script type="text/javascript">
-      (function () {
-        window.onkeydown = function (e) {
-          if ((e.keyCode == 32 || e.keyCode == 37 || e.keyCode == 39) && e.target == document.body) {
-            e.preventDefault();
-          }
+      window.onkeydown = function (e) {
+        if ((e.keyCode == 32 || e.keyCode == 37 || e.keyCode == 39) && e.target == document.body) {
+          e.preventDefault();
         }
-        var canvas = document.getElementById("myCanvas");
-        var ctx = canvas.getContext("2d");
+      }
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
 
-        var game = new Janken.Game();
-        new Janken.GameView(game, ctx).bindTutorial1();
-      })();
+      var game = new Janken.Game();
+
+      var playGame = function () {
+        var menu = document.getElementById("menu");
+        menu.style.display = "none";
+        new Janken.GameView(game, ctx).start();
+      }
+      // new Janken.GameView(game, ctx).bindTutorial1();
     </script>
 
   </body>
