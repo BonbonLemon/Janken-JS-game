@@ -43,18 +43,6 @@
     }.bind(this);
   };
 
-  GameView.prototype.showMainMenu = function () {
-    // var $menu = $('<div>');
-    // $menu.attr('id', 'menu');
-    // var $title = $('<h2>');
-    // $title.html('Janken (Ro Sham Bo)');
-    // $title.attr('id', 'title');
-    // $menu.append($title);
-    //
-    // $('body').append($menu);
-    debugger;
-  };
-
   GameView.prototype.bindTutorial1 = function () {
     document.onkeydown = function (e) {
       if (e.which === 32) {
@@ -119,7 +107,7 @@
         document.onkeydown = null;
         try {
           var game_over = document.getElementById('game-over');
-          game_over.remove();
+          game_over.style.display = "none";
         } catch (err) {}
         this.game = new Janken.Game();
         this.start();
@@ -226,16 +214,18 @@
     window.clearInterval(this.timerIntervalId);
     document.onkeydown = null;
 
-    var h2 = document.createElement('h2');
-    h2.id = "game-over";
-    var p1 = document.createElement('p');
-    p1.innerHTML = "GAME OVER";
-    var p2 = document.createElement('p');
-    p2.innerHTML = 'Press "space" to restart';
-    h2.appendChild(p1);
-    h2.appendChild(p2);
-    var body = document.getElementsByTagName('body')[0];
-    body.appendChild(h2);
+    var gameOver = document.getElementById('game-over');
+    gameOver.style.display = "inherit";
+    // var h2 = document.createElement('h2');
+    // h2.id = "game-over";
+    // var p1 = document.createElement('p');
+    // p1.innerHTML = "GAME OVER";
+    // var p2 = document.createElement('p');
+    // p2.innerHTML = 'Press "space" to restart';
+    // h2.appendChild(p1);
+    // h2.appendChild(p2);
+    // var body = document.getElementsByTagName('body')[0];
+    // body.appendChild(h2);
     this.bindRestart();
   };
 

@@ -22,12 +22,12 @@ canvas {
   text-align: center;
 }*/
 
-#menu {
+#canvas-box {
   position: relative;
   height: 800px;
   width: 1000px;
   margin: 0 auto;
-  outline: thin solid black;
+  /*outline: thin solid black;*/
   top: -800px;
   /*text-align: center;*/
 }
@@ -68,14 +68,28 @@ canvas {
 }
 
 #game-over {
-  position: relative;
-  background: rgba(200, 200, 200, 0.7);
+  display: none;
+  background: rgba(200, 200, 200, 0.85);
   text-align: center;
-  left: 50%;
-  margin-left: -165px;
-  margin-top: -550px;
-  width: 250px;
-  padding: 40px;
+  margin: 0 auto;
+  margin-top: 250px;
+  width: 500px;
+  height: 150px;
+}
+
+#game-over-title {
+  padding-top: 10px;
+}
+
+.game-over-option {
+  float: left;
+  height: 47px;
+  width: 150px;
+  margin: 0 50px;
+  margin-top: 30px;
+  outline: 2px solid black;
+  padding-top: 3px;
+  font-size: 18px;
 }
 
 /*.directions {

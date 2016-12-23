@@ -8,14 +8,27 @@
   </head>
   <body>
     <canvas id="myCanvas" width="1000" height="800"></canvas>
-    <div id="menu">
-      <h2 id="title">Janken (Ro Sham Bo)</h2>
-      <img id="rsp" src="./assets/images/rock-paper-scissors.png">
-      <ul id="menu-select">
-        <li class="menu-option" onclick="playGame()">Play</li>
-        <li class="menu-option">Instructions</li>
-        <li class="menu-option">Settings</li>
-      </ul>
+    <div id="canvas-box">
+      <div id="menu">
+        <h2 id="title">Janken (Ro Sham Bo)</h2>
+        <img id="rsp" src="./assets/images/rock-paper-scissors.png">
+        <ul id="menu-select">
+          <li class="menu-option" onclick="playGame()">Play</li>
+          <li class="menu-option">Instructions</li>
+          <li class="menu-option">Settings</li>
+        </ul>
+      </div>
+
+      <div id='game-over'>
+        <h2 id='game-over-title'>GAME OVER</h2>
+        <ul>
+          <li class='game-over-option'>
+            <p>TRY AGAIN</p>
+            <p>press "space"</p>
+          </li>
+          <li class='game-over-option'>MAIN MENU</li>
+        </ul>
+      </div>
     </div>
     <link href='https://fonts.googleapis.com/css?family=Merienda' rel='stylesheet' type='text/css'>
     <!-- <script type="text/javascript"></script> -->
@@ -45,6 +58,5 @@
       }
       // new Janken.GameView(game, ctx).bindTutorial1();
     </script>
-
   </body>
 </html>
