@@ -105,14 +105,16 @@
     document.onkeydown = function (e) {
       if (e.which === 32) {
         document.onkeydown = null;
-        try {
-          var game_over = document.getElementById('game-over');
-          game_over.style.display = "none";
-        } catch (err) {}
-        this.game = new Janken.Game();
-        this.start();
+        this.restart();
       }
     }.bind(this);
+  };
+
+  GameView.prototype.restart = function () {
+    var game_over = document.getElementById('game-over');
+    game_over.style.display = "none";
+    this.game = new Janken.Game();
+    this.start();
   };
 
   GameView.prototype.drawScore = function () {

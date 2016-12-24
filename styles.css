@@ -92,6 +92,11 @@ canvas {
   font-size: 18px;
 }
 
+.game-over-option:hover {
+  background: rgba(157, 149, 149, 0.85);
+  cursor: pointer;
+}
+
 /*.directions {
   position: relative;
   left: 50%;

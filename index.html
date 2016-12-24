@@ -22,11 +22,11 @@
       <div id='game-over'>
         <h2 id='game-over-title'>GAME OVER</h2>
         <ul>
-          <li class='game-over-option'>
+          <li class='game-over-option' onclick="restart()">
             <p>TRY AGAIN</p>
             <p>press "space"</p>
           </li>
-          <li class='game-over-option'>MAIN MENU</li>
+          <li class='game-over-option' onclick="toMainMenu()">MAIN MENU</li>
         </ul>
       </div>
     </div>
@@ -48,13 +48,30 @@
       }
       var canvas = document.getElementById("myCanvas");
       var ctx = canvas.getContext("2d");
+      var game, janken;
 
-      var game = new Janken.Game();
 
       var playGame = function () {
         var menu = document.getElementById("menu");
         menu.style.display = "none";
-        new Janken.GameView(game, ctx).start();
+
+        game = new Janken.Game();
+        janken = new Janken.GameView(game, ctx);
+        janken.start();
+      }
+
+      var restart = function () {
+        janken.restart();
+      }
+
+      var toMainMenu = function () {
+        window.clearInterval(janken.startIntervalId);
+        janken.ctx.clearRect(0, 0, 1000, 800);
+        var menu = document.getElementById("menu");
+        menu.style.display = "inherit";
+        var gameOver = document.getElementById("game-over");
+        gameOver.style.display = "none";
+        janken.music.pause();
       }
       // new Janken.GameView(game, ctx).bindTutorial1();
     </script>
