@@ -14,10 +14,17 @@
         <img id="rsp" src="./assets/images/rock-paper-scissors.png">
         <ul id="menu-select">
           <li class="menu-option" onclick="playGame()">Play</li>
-          <li class="menu-option">Instructions</li>
-          <li class="menu-option">Settings</li>
+          <li class="menu-option" onclick="startTutorial()">Instructions</li>
+          <!-- <li class="menu-option">Settings</li> -->
         </ul>
       </div>
+
+      <h1 id="tutorial-header">
+        <button class="tutorial-button" onclick="backTutorial()">Previous</button>
+        <span id="tutorial-page-title">Controls</span>
+        <span id="tutorial-page-number">(1/3)</span>
+        <button class="tutorial-button" onclick="forwardTutorial()">Next</button>
+      </h1>
 
       <div id='game-over'>
         <h2 id='game-over-title'>GAME OVER</h2>
@@ -49,6 +56,7 @@
       var canvas = document.getElementById("myCanvas");
       var ctx = canvas.getContext("2d");
       var game, janken;
+      var tutorialPageNum;
 
 
       var playGame = function () {
@@ -72,6 +80,63 @@
         var gameOver = document.getElementById("game-over");
         gameOver.style.display = "none";
         janken.music.pause();
+      }
+
+      var startTutorial = function () {
+        var canvas = document.getElementById("myCanvas");
+        canvas.style.backgroundImage = "url('./assets/images/tutorial1.png')";
+        var menu = document.getElementById("menu");
+        menu.style.display = "none";
+        var tutorialHeader = document.getElementById("tutorial-header");
+        tutorialHeader.style.display = "inherit";
+        tutorialPageNum = 1;
+        handleTutorialHeader();
+      }
+
+      var backTutorial = function () {
+        tutorialPageNum--;
+        if (tutorialPageNum < 1) {
+          returnToMenu();
+        } else {
+          handleTutorialHeader();
+        }
+      }
+
+      var forwardTutorial = function () {
+        tutorialPageNum++;
+        if (tutorialPageNum > 3) {
+          returnToMenu();
+        } else {
+          handleTutorialHeader();
+        }
+      }
+
+      var handleTutorialHeader = function () {
+        var canvas = document.getElementById("myCanvas");
+        canvas.style.backgroundImage = "url('./assets/images/tutorial" + tutorialPageNum + ".png')";
+        var pageNum = document.getElementById("tutorial-page-number");
+        pageNum.innerHTML = "(" + tutorialPageNum + "/3)"
+        var pageTitle = document.getElementById("tutorial-page-title");
+        switch (tutorialPageNum) {
+          case 1:
+            pageTitle.innerHTML = "Controls";
+            break;
+          case 2:
+            pageTitle.innerHTML = "Gameplay";
+            break;
+          case 3:
+            pageTitle.innerHTML = "Scoring";
+            break;
+        }
+      }
+
+      var returnToMenu = function () {
+        var canvas = document.getElementById("myCanvas");
+        canvas.style.backgroundImage = "";
+        var menu = document.getElementById("menu");
+        menu.style.display = "inherit";
+        var tutorialHeader = document.getElementById("tutorial-header");
+        tutorialHeader.style.display = "none";
       }
       // new Janken.GameView(game, ctx).bindTutorial1();
     </script>
