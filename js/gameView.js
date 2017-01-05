@@ -103,7 +103,7 @@
 
   GameView.prototype.bindRestart = function () {
     document.onkeydown = function (e) {
-      if (e.which === 32) {
+      if (e.which === 82) {
         document.onkeydown = null;
         this.restart();
       }
