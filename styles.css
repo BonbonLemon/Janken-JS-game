@@ -22,9 +22,7 @@ canvas {
   height: 800px;
   width: 1000px;
   margin: 0 auto;
-  /*outline: thin solid black;*/
-  top: -800px;
-  /*text-align: center;*/
+  margin-top: -800px;
 }
 
 #volume-button {
@@ -92,11 +90,11 @@ canvas {
 }
 
 #game-over {
+  position: absolute;
   display: none;
   background: rgba(200, 200, 200, 0.85);
   text-align: center;
-  margin: 0 auto;
-  margin-top: 250px;
+  margin:  250px;
   width: 500px;
   height: 150px;
 }
