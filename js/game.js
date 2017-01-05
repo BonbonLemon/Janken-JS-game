@@ -29,8 +29,10 @@
     var intervalID = setInterval(function () {
       this.add(new Janken.Card(this));
 
-      this.cardFlipSound.currentTime = 0;
-      this.cardFlipSound.play();
+      if (!isMuted) {
+        this.cardFlipSound.currentTime = 0;
+        this.cardFlipSound.play();
+      }
 
       if (++x === 10) {
         window.clearInterval(intervalID);

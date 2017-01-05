@@ -76,7 +76,9 @@
 
   Weapon.prototype.fire = function () {
     if (this.collision && !this.isFired) {
-      this.fireSound.play();
+      if (!isMuted) {
+        this.fireSound.play();
+      }
       this.isFired = true;
     }
   };

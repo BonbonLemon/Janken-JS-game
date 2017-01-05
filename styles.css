@@ -27,6 +27,17 @@ canvas {
   /*text-align: center;*/
 }
 
+#volume-button {
+  position: absolute;
+  right: 0;
+  width: 50px;
+  margin: 10px;
+}
+
+#volume-button:hover {
+  cursor: pointer;
+}
+
 #title {
   font-family: 'Merienda', cursive;
   font-size: 40px;

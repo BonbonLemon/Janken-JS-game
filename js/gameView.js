@@ -246,7 +246,9 @@
       this.music = new Audio("./assets/sounds/music.wav");
       this.music.volume = 0.7;
       this.music.loop = true;
-      this.music.play();
+      if (!isMuted) {
+        this.music.play();
+      }
     }
 
     if (!this.isStarted) {
@@ -308,8 +310,10 @@
     cardVal = GESTURES[card.gesture];
     weaponVal = GESTURES[weapon.gesture];
     if (cardVal === weaponVal) { // NOTE: Tie
-      this.tieSound.currentTime = 0.13;
-      this.tieSound.play();
+      if (!isMuted) {
+        this.tieSound.currentTime = 0.13;
+        this.tieSound.play();
+      }
 
       card.dir = [0, 0];
       weapon.dir = [0, 0];
@@ -327,8 +331,10 @@
         this.isNoCards();
       }.bind(this), 500);
     } else if (((cardVal + 1) % 3) === weaponVal) { // NOTE: Win
-      this.winSound.currentTime = 0;
-      this.winSound.play();
+      if (!isMuted) {
+        this.winSound.currentTime = 0;
+        this.winSound.play();
+      }
 
       this.score++;
 
@@ -344,8 +350,10 @@
         this.isNoCards();
       }.bind(this), 500);
     } else { // NOTE: Lose
-      this.loseSound.currentTime = 0;
-      this.loseSound.play();
+      if (!isMuted) {
+        this.loseSound.currentTime = 0;
+        this.loseSound.play();
+      }
 
       this.lives--;
 

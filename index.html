@@ -9,6 +9,7 @@
   <body>
     <canvas id="myCanvas" width="1000" height="800"></canvas>
     <div id="canvas-box">
+      <img id="volume-button" onclick="changeVolume()" src="./assets/images/volume.png">
       <div id="menu">
         <h2 id="title">Janken (Ro Sham Bo)</h2>
         <img id="rsp" src="./assets/images/rock-paper-scissors.png">
@@ -55,9 +56,29 @@
       }
       var canvas = document.getElementById("myCanvas");
       var ctx = canvas.getContext("2d");
-      var game, janken;
-      var tutorialPageNum;
+      var game, janken, tutorialPageNum;
+      var isMuted = false;
 
+      var changeVolume = function () {
+        var volumeButton = document.getElementById("volume-button");
+        if (volumeButton.src.indexOf("mute") >= 0) {
+          volumeButton.src = "./assets/images/volume.png";
+          isMuted = false;
+          try {
+            janken.music.play();
+          } catch (e) {
+
+          }
+        } else {
+          volumeButton.src = "./assets/images/mute.png";
+          isMuted = true;
+          try {
+            janken.music.pause();
+          } catch (e) {
+
+          }
+        }
+      }
 
       var playGame = function () {
         var menu = document.getElementById("menu");
